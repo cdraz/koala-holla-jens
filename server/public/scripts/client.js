@@ -141,7 +141,7 @@ function renderKoalas(koalas) {
   // Render each koala
   for (let koala of koalas) {
     $('#viewKoalas').append(`
-      <tr id="tableRow" data-id="${koala.id}" data-ready_to_transfer="${koala.ready_to_transfer}">
+      <tr data-id="${koala.id}" data-ready_to_transfer="${koala.ready_to_transfer}">
         <td>${koala.name}</td>
         <td>${koala.age}</td>
         <td>${koala.gender}</td>
