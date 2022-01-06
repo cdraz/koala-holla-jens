@@ -21,13 +21,13 @@ pool.on('error', (err) => {
 
 // GET
 koalaRouter.get('/', (req,res) => {
-      // let queryText = `SELECT * FROM "koalas"`
-      // pool.query(queryText).then((result) => {
-      //       res.send(result.rows);
-      // }).catch((err) => {
-      //    console.log('error getting koalas', err);
-      //    res.sendStatus(500)'
-      // })
+      let queryText = `SELECT * FROM "koalas"`
+      pool.query(queryText).then((result) => {
+            res.send(result.rows);
+      }).catch((err) => {
+         console.log('error getting koalas', err);
+         res.sendStatus(500)
+      })
       console.log('in GET /koalas');
 })
 
@@ -36,27 +36,28 @@ koalaRouter.post('/', (req, res) => {
     let newKoala = req.body;
     console.log('Adding koala', newKoala);
       
-    // let queryText = `
-    //         INSERT INTO "koalas" 
-    //               ("name", "gender", "age", "ready_to_transfer", "notes")
-    //         VALUES ($1, $2, $3, $4, $5);
-    //         `;
+    let queryText = `
+            INSERT INTO "koalas" 
+                  ("name", "gender", "age", "ready_to_transfer", "notes")
+            VALUES ($1, $2, $3, $4, $5);
+            `;
 
-    // let queryParams = [
-    //         newKoala.name, 
-    //         newKoala.age, 
-    //         newKoala.ready_to_transfer, 
-    //         newKoala.notes
-    //     ];
+    let queryParams = [
+            newKoala.name,
+            newKoala.gender,
+            newKoala.age, 
+            newKoala.ready_to_transfer, 
+            newKoala.notes
+        ];
 
-    //   pool.query(queryText, )
-    //         .then(result => {
-    //               res.sendStatus(201);
-    //         })
-    //         .catch(error => {
-    //               console.log(`Error adding new koala 👎`, error);
-    //               res.sendStatus(500);
-    //         });
+      pool.query(queryText, queryParams)
+            .then( (res) => {
+                  res.sendStatus(201);
+            })
+            .catch(error => {
+                  console.log(`Error adding new koala 👎`, error);
+                  res.sendStatus(500);
+            });
 }); // end of POST endpoints
 
 // PUT
