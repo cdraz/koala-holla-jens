@@ -16,12 +16,15 @@
     </header>
     <section id="addKoala">
       <h2>Add Koala</h2>
-      <input type="text" id="nameIn" value="" placeholder="Name">
-      <input type="text" id="ageIn" value="" placeholder="Age">
-      <input type="text" id="genderIn" value="" placeholder="Gender">
-      <input type="text" id="readyForTransferIn" value="" placeholder="Transfer">
-      <input type="text" id="notesIn" value="" placeholder="Notes">
-      <button type="button" id="addButton">Add Koala</button>
+      <form id="koalaForm">
+        <input type="text" class="koalaInput" id="nameIn" value="" placeholder="Name" required>
+        <input type="text" class="koalaInput" id="ageIn" value="" placeholder="Age" required>
+        <input type="text" class="koalaInput" id="genderIn" value="" placeholder="Gender" required>
+        <label for="readyForTransferIn"> Ready to Transfer</label>
+        <input type="checkbox" id="readyForTransferIn">
+        <input type="text" class="koalaInput" id="notesIn" placeholder="Notes">
+        <button type="submit" id="addButton">Add Koala</button>
+      </form>
     </section>
     <section>
       <h2>All Koalas</h2>
