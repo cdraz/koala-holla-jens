@@ -38,3 +38,24 @@ function saveKoala( newKoala ){
   // ajax call to server to get koalas
  
 }
+
+// Creating ajax request for deleting a Koala
+function deleteKoala() {
+  // Need to grab the koala ID after we render
+  let koalaId = $(this).parents('tr').data('id');
+
+  // Create boiler plate ajax request to delete koala
+  $.ajax({
+    method: 'DELETE',
+    url: `/koalas/${koalaId}`,
+  })
+    .then( () => {
+      console.log('delete successful!');
+      res.sendStatus(200);
+    })
+    .catch( (err) => {
+      console.log('delete failed', err);
+      res.sendStatus(500);
+      
+    })
+}
