@@ -101,7 +101,7 @@ koalaRouter.delete('/:id', (req, res) => {
 
     // Pool query to modify database
     pool.query(queryText, queryParams)
-        .then((dbRes) => {
+        .then( () => {
             res.sendStatus(200);
         })
         .catch((err) => {
