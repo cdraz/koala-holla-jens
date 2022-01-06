@@ -1,7 +1,7 @@
-console.log( 'js' );
+console.log('js');
 
-$( document ).ready( function(){
-  console.log( 'JQ' );
+$(document).ready(function () {
+  console.log('JQ');
   // Establish Click Listeners
   setupClickListeners()
   // load existing koalas on page load
@@ -12,8 +12,8 @@ $( document ).ready( function(){
 }); // end doc ready
 
 function setupClickListeners() {
-  $( '#addButton' ).on( 'click', function(){
-    console.log( 'in addButton on click' );
+  $('#addButton').on('click', function () {
+    console.log('in addButton on click');
     // get user input and put in an object
     // NOT WORKING YET :(
     // using a test object
@@ -29,16 +29,24 @@ function setupClickListeners() {
   }); 
 };
 
-function getKoalas(){
-  console.log( 'in getKoalas' );
+function getKoalas() {
+  console.log('in getKoalas');
   // ajax call to server to get koalas
-  
+  $.ajax({
+    method: 'GET',
+    url: '/koalas',
+  }).then((res) => {
+    console.log(res);
+    //********************************** make a new render koalas function and call it here
+  }).catch((err) => {
+    console.log("error in GET /koalas", err);
+  })
 } // end getKoalas
 
-function saveKoala( newKoala ){
-  console.log( 'in saveKoala', newKoala );
+function saveKoala(newKoala) {
+  console.log('in saveKoala', newKoala);
   // ajax call to server to get koalas
- 
+
 }
 
 // Creating ajax request for deleting a Koala
