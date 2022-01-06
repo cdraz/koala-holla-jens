@@ -85,8 +85,7 @@ function deleteKoala() {
   })
     .then( () => {
       console.log('delete successful!');
-      // Add refresh/render function here
-      res.sendStatus(200);
+      getKoalas();
     })
     .catch( (err) => {
       console.log('delete failed', err);
