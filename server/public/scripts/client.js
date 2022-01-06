@@ -41,8 +41,23 @@ function getKoalas() {
   })
 } // end getKoalas
 
-function saveKoala(newKoala) {
-  console.log('in saveKoala', newKoala);
-  // ajax call to server to get koalas
 
-}
+function saveKoala( newKoala ){
+  console.log( 'in saveKoala', newKoala);
+  // ajax call to server to get koalas
+  // sending to server as "req.body"
+  $.ajax({
+    method: 'POST',
+    url:    '/koalas',
+    data:   newKoala,
+  })
+  .then((response) => {
+    console.log('in POST /koalas', response);
+    
+  })
+  .catch((err) => {
+    console.log('POST /koalas Failed!! 🤯', err);
+    alert('Unable to connect to server, please try again!!')
+  })
+}; // End of saveKoala POST function
+
