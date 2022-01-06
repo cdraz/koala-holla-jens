@@ -6,9 +6,11 @@ $(document).ready(function () {
   setupClickListeners()
   // load existing koalas on page load
   getKoalas();
+  
   // Calling deleteKoala to show that it console logs and works
   deleteKoala();
 
+  onReadyToTransfer();
 }); // end doc ready
 
 function setupClickListeners() {
@@ -43,11 +45,26 @@ function getKoalas() {
   })
 } // end getKoalas
 
-function saveKoala(newKoala) {
-  console.log('in saveKoala', newKoala);
-  // ajax call to server to get koalas
 
-}
+function saveKoala( newKoala ){
+  console.log( 'in saveKoala', newKoala);
+  // ajax call to server to get koalas
+  // sending to server as "req.body"
+  $.ajax({
+    method: 'POST',
+    url:    '/koalas',
+    data:   newKoala,
+  })
+  .then((response) => {
+    console.log('in POST /koalas', response);
+    
+  })
+  .catch((err) => {
+    console.log('POST /koalas Failed!! 🤯', err);
+    alert('Unable to connect to server, please try again!!')
+  })
+}; // End of saveKoala POST function
+
 
 // Creating ajax request for deleting a Koala
 function deleteKoala() {
@@ -71,3 +88,34 @@ function deleteKoala() {
       
     })
 } // end deleteKoala
+
+function onReadyToTransfer() {
+  console.log( 'in onReadyToTransfer' );
+
+  // Pull koalaId and transfer status from table
+  let koalaId = $(this).parents('tr').data('id');
+  let transferStatus = $(this).parents('tr').data('ready_to_transfer');
+
+  // Check if true/false then reassign to false/true respectively (stretch goal toggle)
+  if (transferStatus) {
+     transferStatus = false;
+  } else {
+    transferStatus = true;
+  }
+
+  // Make PUT request to /koalas/:id
+  $.ajax({
+    method: 'PUT',
+    url: `/koalas/${koalaId}`,
+    data: {
+      ready_to_transfer: transferStatus
+    }
+  })
+    .then( () => {
+      console.log('PUT success');
+      getKoalas();
+    })
+    .catch( err => {
+      console.log('PUT failed', err);
+    });
+} // end onReadyToTransfer()
