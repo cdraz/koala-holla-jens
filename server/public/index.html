@@ -6,39 +6,59 @@
     <script src="vendors/jquery-3.3.1.min.js" charset="utf-8"></script>
     <script src="scripts/client.js" charset="utf-8"></script>
     <link rel="stylesheet" href="views/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
     <header>
-      <img src="images/icon.png" class="icon" />
-      <h1>Koala Holla</h1>
-      <h3>1976 Llama Comma Drive</h2>
-      <h3>Walla Walla, WA</h2>
+      <div class="container-fluid header-content">
+        <div class="row">
+          <div class="col-sm- logo-div">
+            <img src="images/icon.png" class="icon" />
+          </div class="col-xl-">
+            <div class="info-div">
+              <h1>Koala Holla</h1>
+              <h3>1976 Llama Comma Drive</h3>
+              <h3>Walla Walla, WA</h3>
+            </div>
+        </div>
+      </div>
     </header>
-    <section id="addKoala">
-      <h2>Add Koala</h2>
-      <input type="text" id="nameIn" value="" placeholder="Name">
-      <input type="text" id="ageIn" value="" placeholder="Age">
-      <input type="text" id="genderIn" value="" placeholder="Gender">
-      <input type="text" id="readyForTransferIn" value="" placeholder="Transfer">
-      <input type="text" id="notesIn" value="" placeholder="Notes">
-      <button type="button" id="addButton">Add Koala</button>
-    </section>
-    <section>
-      <h2>All Koalas</h2>
-      <input type="text" id="filterField" onkeyup="filterKoalas()" placeholder="Filter Koalas by Name">
-      <table id = "koalaTable">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>Ready for Transfer</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody id="viewKoalas">
-        </tbody>
-      </table>
-    </section>
+    <main>
+      <div class="container-fluid">
+        <div class="grid">
+          <section id="addKoala">
+            <h2>Add Koala</h2>
+            <input type="text" id="nameIn" value="" placeholder="Name">
+            <input type="text" id="ageIn" value="" placeholder="Age">
+            <input type="text" id="genderIn" value="" placeholder="Gender">
+            <input type="text" id="readyForTransferIn" value="" placeholder="Transfer">
+            <input type="text" id="notesIn" value="" placeholder="Notes">
+            <button type="button" id="addButton">Add Koala</button>
+          </section>
+        </div>
+        <div class="grid">
+          <section>
+            <h2>All Koalas</h2>
+            <input type="text" id="filterField" onkeyup="filterKoalas()" placeholder="Filter Koalas by Name">
+            <table class="table table-bordered" id="koalaTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th>Gender</th>
+                  <th>Ready for Transfer</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody id="viewKoalas">
+              </tbody>
+            </table>
+          </section>
+        </div>
+    </div>
+  </main>
+  <footer>
+    © 2022 Koala Holla, ltd.
+  </footer>
   </body>
 </html>

@@ -1,0 +1,40 @@
+header {
+    background-color: #318add;
+}
+
+.header-content {
+    padding-top: 40px;
+    padding-bottom: 20px;
+    color: #ffffff;
+}
+.logo-div {
+    padding-left: 45px;
+}
+
+.info-div {
+    padding-left: 45px;
+}
+
+.icon {
+    height: 160px;
+    width: 160px;
+    float: left;
+}
+
+main {
+    padding: 50px;
+}
+
+main .grid {
+    padding-top: 30px;
+}
+footer {
+    padding-top: 45px;
+    padding-left: 45px;
+    background-color: #318add;
+    color: #ffffff;
+    position: fixed;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
+}
