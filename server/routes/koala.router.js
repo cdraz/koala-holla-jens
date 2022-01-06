@@ -106,6 +106,7 @@ koalaRouter.delete('/:id', (req, res) => {
         })
         .catch((err) => {
             console.log('failed to delete', err);
+            res.sendStatus(500);
         })
     console.log('in DELETE /koalas');
 });
