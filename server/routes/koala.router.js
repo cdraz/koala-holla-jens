@@ -26,7 +26,7 @@ koalaRouter.get('/', (req,res) => {
             res.send(result.rows);
       }).catch((err) => {
          console.log('error getting koalas', err);
-         res.sendStatus(500)
+         res.sendStatus(500);
       })
       console.log('in GET /koalas');
 })
@@ -63,7 +63,6 @@ koalaRouter.post('/', (req, res) => {
 // PUT
 koalaRouter.put('/:id', (req, res) => {
     console.log('id is', req.params.id);
-    /*
     let queryText = `
         UPDATE "koalas"
         SET "ready_to_transfer" = $1
@@ -82,7 +81,6 @@ koalaRouter.put('/:id', (req, res) => {
         .catch( err => {
             console.log('PUT /koalas failed', err);
         })
-    */
 });
 
 // DELETE
@@ -90,25 +88,25 @@ koalaRouter.put('/:id', (req, res) => {
 koalaRouter.delete('/:id', (req, res) => {
     console.log('in koalas router delete', req.params.id);
 
-    // Create request for SQL database, leaving blanks for now
-    // let queryText = `
-    //     DELETE FROM "koalas"
-    //     WHERE id = $1;
-    // `;
+    Create request for SQL database, leaving blanks for now
+    let queryText = `
+        DELETE FROM "koalas"
+        WHERE id = $1;
+    `;
 
-    // Empty params to fill in for later
-    // let queryParams = [
-    //     req.params.id,
-    // ];
+    Empty params to fill in for later
+    let queryParams = [
+        req.params.id,
+    ];
 
-    // Pool query to modify database
-    // pool.query(queryText, queryParams)
-    //     .then((dbRes) => {
-    //         res.sendStatus(200);
-    //     })
-    //     .catch((err) => {
-    //         console.log('failed to delete', err);
-    //     })
+    Pool query to modify database
+    pool.query(queryText, queryParams)
+        .then((dbRes) => {
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log('failed to delete', err);
+        })
     console.log('in DELETE /koalas');
 });
 
