@@ -9,7 +9,7 @@ const config = {
       port: 5432,
 }
 
-const pool = new pg.pool(config);
+const pool = new pg.Pool(config);
 
 pool.on("connect", () => {
       console.log('connected to postgres');
