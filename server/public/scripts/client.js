@@ -6,7 +6,7 @@ $( document ).ready( function(){
   setupClickListeners()
   // load existing koalas on page load
   getKoalas();
-
+  onReadyToTransfer();
 }); // end doc ready
 
 function setupClickListeners() {
@@ -37,4 +37,35 @@ function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
   // ajax call to server to get koalas
  
+}
+
+function onReadyToTransfer() {
+  console.log( 'in onReadyToTransfer' );
+
+  // Pull koalaId and transfer status from table
+  let koalaId = $(this).parents('tr').data('id');
+  let transferStatus = $(this).parents('tr').data('ready_to_transfer');
+
+  // Check if true/false then reassign to false/true respectively (stretch goal toggle)
+  if (transferStatus) {
+     transferStatus = false;
+  } else {
+    transferStatus = true;
+  }
+
+  // Make PUT request to /koalas/:id
+  $.ajax({
+    method: 'PUT',
+    url: `/koalas/${koalaId}`,
+    data: {
+      ready_to_transfer: transferStatus
+    }
+  })
+    .then( () => {
+      console.log('PUT success');
+      getKoalas();
+    })
+    .catch( err => {
+      console.log('PUT failed', err);
+    });
 }
