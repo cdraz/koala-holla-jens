@@ -6,6 +6,10 @@ $(document).ready(function () {
   setupClickListeners()
   // load existing koalas on page load
   getKoalas();
+  
+  // Calling deleteKoala to show that it console logs and works
+  deleteKoala();
+
   onReadyToTransfer();
 }); // end doc ready
 
@@ -23,9 +27,9 @@ function setupClickListeners() {
       notes: 'testName',
     };
     // call saveKoala with the new obejct
-    saveKoala(koalaToSend);
-  });
-}
+    saveKoala( koalaToSend );
+  }); 
+};
 
 function getKoalas() {
   console.log('in getKoalas');
@@ -45,8 +49,45 @@ function getKoalas() {
 function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala);
   // ajax call to server to get koalas
+  // sending to server as "req.body"
+  $.ajax({
+    method: 'POST',
+    url:    '/koalas',
+    data:   newKoala,
+  })
+  .then((response) => {
+    console.log('in POST /koalas', response);
+    
+  })
+  .catch((err) => {
+    console.log('POST /koalas Failed!! 🤯', err);
+    alert('Unable to connect to server, please try again!!')
+  })
+}; // End of saveKoala POST function
 
-}
+
+// Creating ajax request for deleting a Koala
+function deleteKoala() {
+  // Need to grab the koala ID after we render
+  let koalaId = $(this).parents('tr').data('id');
+  console.log('in delete Koala');
+
+  // Create boiler plate ajax request to delete koala
+  $.ajax({
+    method: 'DELETE',
+    url: `/koalas/${koalaId}`,
+  })
+    .then( () => {
+      console.log('delete successful!');
+      // Add refresh/render function here
+      res.sendStatus(200);
+    })
+    .catch( (err) => {
+      console.log('delete failed', err);
+      res.sendStatus(500);
+      
+    })
+} // end deleteKoala
 
 function onReadyToTransfer() {
   console.log( 'in onReadyToTransfer' );
@@ -77,21 +118,4 @@ function onReadyToTransfer() {
     .catch( err => {
       console.log('PUT failed', err);
     });
-}
-
-  // sending to server as "req.body"
-  $.ajax({
-    method: 'POST',
-    url:    '/koalas',
-    data:   newKoala,
-  })
-  .then((response) => {
-    console.log('in POST /koalas', response);
-    
-  })
-  .catch((err) => {
-    console.log('POST /koalas Failed!! 🤯', err);
-    alert('Unable to connect to server, please try again!!')
-  })
-}; // End of saveKoala POST function
-
+} // end onReadyToTransfer()
