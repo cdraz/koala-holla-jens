@@ -51,7 +51,7 @@ koalaRouter.post('/', (req, res) => {
         ];
 
       pool.query(queryText, queryParams)
-            .then(result => {
+            .then( (res) => {
                   res.sendStatus(201);
             })
             .catch(error => {

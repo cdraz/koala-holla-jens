@@ -62,7 +62,6 @@ function saveKoala(){
   })
   .then((response) => {
     console.log('in POST /koalas', response);
-    
   })
   .catch((err) => {
     console.log('POST /koalas Failed!! 🤯', err);
