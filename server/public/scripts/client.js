@@ -7,11 +7,6 @@ $(document).ready(function () {
   // load existing koalas on page load
   getKoalas();
   
-  // Calling deleteKoala to show that it console logs and works
-  deleteKoala();
-
-  saveKoala();
-  onReadyToTransfer();
 }); // end doc ready
 
 function setupClickListeners() {
@@ -40,7 +35,7 @@ function getKoalas() {
     url: '/koalas',
   }).then((res) => {
     console.log(res);
-    //********************************** make a new render koalas function and call it here
+    renderKoalas(res);
   }).catch((err) => {
     console.log("error in GET /koalas", err);
   })
@@ -120,3 +115,34 @@ function onReadyToTransfer() {
       console.log('PUT failed', err);
     });
 } // end onReadyToTransfer()
+
+function renderKoalas(koalas) {
+  console.log('in renderKoalas');
+
+  // Empty the table
+  $('#viewKoalas').empty();
+
+  // Render each koala
+  for (let koala of koalas) {
+    $('#viewKoalas').append(`
+      <tr data-id="${koala.id}" data-ready_to_transfer="${koala.ready_to_transfer}">
+        <td>${koala.name}</td>
+        <td>${koala.age}</td>
+        <td>${koala.gender}</td>
+        <td>${koala.ready_to_transfer}</td>
+        <td>${koala.notes}</td>
+        <td>
+          <button class="transferBtn">
+            Ready for Transfer
+          </button>
+        </td>
+        <td>
+          <button class="deleteBtn">
+          Delete
+          </button>
+        </td>
+      </tr>
+    `);
+
+  }
+}
