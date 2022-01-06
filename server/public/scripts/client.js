@@ -1,12 +1,19 @@
 console.log('js');
+// let fakeKoala = {
+//   name: 'Fakey',
+//   age:  1,
+//   gender: 'F',
+//   ready_to_transfer: true,
+//   notes:  'This is fake',
+// };
 
 $(document).ready(function () {
   console.log('JQ');
   // Establish Click Listeners
-  setupClickListeners()
+  setupClickListeners();
   // load existing koalas on page load
   getKoalas();
-  
+
 }); // end doc ready
 
 function setupClickListeners() {
@@ -19,7 +26,7 @@ function setupClickListeners() {
       name: 'testName',
       age: 'testName',
       gender: 'testName',
-      readyForTransfer: 'testName',
+      ready_to_transfer: 'testName',
       notes: 'testName',
     };
     // call saveKoala with the new obejct
@@ -44,18 +51,19 @@ function getKoalas() {
 } // end getKoalas
 
 
-function saveKoala( ){
+function saveKoala(){
   console.log( 'in saveKoala');
   // ajax call to server to get koalas
   // sending to server as "req.body"
   $.ajax({
     method: 'POST',
     url:    '/koalas',
-//    data:   newKoala,
+    // Commenting out until we're ready to create click
+    // Need render function complete first
+    // data:   newKoala,
   })
   .then((response) => {
     console.log('in POST /koalas', response);
-    
   })
   .catch((err) => {
     console.log('POST /koalas Failed!! 🤯', err);
@@ -82,8 +90,6 @@ function deleteKoala() {
     })
     .catch( (err) => {
       console.log('delete failed', err);
-      res.sendStatus(500);
-      
     })
 } // end deleteKoala
 

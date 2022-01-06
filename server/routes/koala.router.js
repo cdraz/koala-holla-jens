@@ -36,33 +36,33 @@ koalaRouter.post('/', (req, res) => {
     let newKoala = req.body;
     console.log('Adding koala', newKoala);
       
-    // let queryText = `
-    //         INSERT INTO "koalas" 
-    //               ("name", "gender", "age", "ready_to_transfer", "notes")
-    //         VALUES ($1, $2, $3, $4, $5);
-    //         `;
+    let queryText = `
+            INSERT INTO "koalas" 
+                  ("name", "gender", "age", "ready_to_transfer", "notes")
+            VALUES ($1, $2, $3, $4, $5);
+            `;
 
-    // let queryParams = [
-    //         newKoala.name, 
-    //         newKoala.age, 
-    //         newKoala.ready_to_transfer, 
-    //         newKoala.notes
-    //     ];
+    let queryParams = [
+            newKoala.name,
+            newKoala.gender,
+            newKoala.age, 
+            newKoala.ready_to_transfer, 
+            newKoala.notes
+        ];
 
-    //   pool.query(queryText, )
-    //         .then(result => {
-    //               res.sendStatus(201);
-    //         })
-    //         .catch(error => {
-    //               console.log(`Error adding new koala 👎`, error);
-    //               res.sendStatus(500);
-    //         });
+      pool.query(queryText, queryParams)
+            .then( (res) => {
+                  res.sendStatus(201);
+            })
+            .catch(error => {
+                  console.log(`Error adding new koala 👎`, error);
+                  res.sendStatus(500);
+            });
 }); // end of POST endpoints
 
 // PUT
 koalaRouter.put('/:id', (req, res) => {
     console.log('id is', req.params.id);
-    /*
     let queryText = `
         UPDATE "koalas"
         SET "ready_to_transfer" = $1
@@ -81,7 +81,6 @@ koalaRouter.put('/:id', (req, res) => {
         .catch( err => {
             console.log('PUT /koalas failed', err);
         })
-    */
 });
 
 // DELETE
@@ -89,25 +88,25 @@ koalaRouter.put('/:id', (req, res) => {
 koalaRouter.delete('/:id', (req, res) => {
     console.log('in koalas router delete', req.params.id);
 
-    // Create request for SQL database, leaving blanks for now
-    // let queryText = `
-    //     DELETE FROM "koalas"
-    //     WHERE id = $1;
-    // `;
+    Create request for SQL database, leaving blanks for now
+    let queryText = `
+        DELETE FROM "koalas"
+        WHERE id = $1;
+    `;
 
-    // Empty params to fill in for later
-    // let queryParams = [
-    //     req.params.id,
-    // ];
+    Empty params to fill in for later
+    let queryParams = [
+        req.params.id,
+    ];
 
-    // Pool query to modify database
-    // pool.query(queryText, queryParams)
-    //     .then((dbRes) => {
-    //         res.sendStatus(200);
-    //     })
-    //     .catch((err) => {
-    //         console.log('failed to delete', err);
-    //     })
+    Pool query to modify database
+    pool.query(queryText, queryParams)
+        .then((dbRes) => {
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log('failed to delete', err);
+        })
     console.log('in DELETE /koalas');
 });
 
