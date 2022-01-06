@@ -6,6 +6,8 @@ $( document ).ready( function(){
   setupClickListeners()
   // load existing koalas on page load
   getKoalas();
+  // Calling deleteKoala to show that it console logs and works
+  deleteKoala();
 
 }); // end doc ready
 
@@ -25,7 +27,7 @@ function setupClickListeners() {
     // call saveKoala with the new obejct
     saveKoala( koalaToSend );
   }); 
-}
+};
 
 function getKoalas(){
   console.log( 'in getKoalas' );
@@ -43,6 +45,7 @@ function saveKoala( newKoala ){
 function deleteKoala() {
   // Need to grab the koala ID after we render
   let koalaId = $(this).parents('tr').data('id');
+  console.log('in delete Koala');
 
   // Create boiler plate ajax request to delete koala
   $.ajax({
@@ -51,6 +54,7 @@ function deleteKoala() {
   })
     .then( () => {
       console.log('delete successful!');
+      // Add refresh/render function here
       res.sendStatus(200);
     })
     .catch( (err) => {
@@ -58,4 +62,4 @@ function deleteKoala() {
       res.sendStatus(500);
       
     })
-}
+} // end deleteKoala

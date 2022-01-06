@@ -29,18 +29,19 @@ pool.on('error', (err) => {
 
 
 // DELETE
-// Adding endpoint without anything after the URL to fill in for later
-router.delete('/', (req, res) => {
+// Adding endpoint
+koalaRouter.delete('/:id', (req, res) => {
     console.log('in koalas router delete', req.params.id);
 
     // Create request for SQL database, leaving blanks for now
     let queryText = `
-        
+        DELETE FROM "koalas"
+        WHERE id = $1;
     `;
 
     // Empty params to fill in for later
     let queryParams = [
-
+        req.params.id,
     ];
 
     // Pool query to modify database
