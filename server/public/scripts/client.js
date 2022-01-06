@@ -83,9 +83,9 @@ function deleteKoala() {
     method: 'DELETE',
     url: `/koalas/${koalaId}`,
   })
-    .then( (reponse) => {
+    .then( (response) => {
       console.log('delete successful!', response);
-      // Add refresh/render function here
+      getKoalas();
     })
     .catch( (err) => {
       console.log('delete failed', err);
