@@ -4,41 +4,42 @@ const pg = require('pg');
 
 // DB CONNECTION
 const config = {
-      database: 'koala_holla',
-      host: 'localhost',
-      port: 5432,
+    database: 'koala_holla',
+    host: 'localhost',
+    port: 5432,
 }
 
 const pool = new pg.Pool(config);
 
 pool.on("connect", () => {
-      console.log('connected to postgres');
+    console.log('connected to postgres');
 });
 
 pool.on('error', (err) => {
-      console.log('error connecting to postgres', err);
+    console.log('error connecting to postgres', err);
 });
 
 // GET
 koalaRouter.get('/', (req,res) => {
-      let queryText = `SELECT * FROM "koalas" ORDER BY "name"`
-      pool.query(queryText).then((result) => {
+    console.log('in GET /koalas');
+    let queryText = `SELECT * FROM "koalas" ORDER BY "name"`
+    pool.query(queryText).then((result) => {
             res.send(result.rows);
-      }).catch((err) => {
-         console.log('error getting koalas', err);
-         res.sendStatus(500);
-      })
-      console.log('in GET /koalas');
+    })
+    .catch((err) => {
+        console.log('error getting koalas', err);
+        res.sendStatus(500);
+    })
 })
 
 // POST
 koalaRouter.post('/', (req, res) => {
     let newKoala = req.body;
     console.log('Adding koala', newKoala);
-      
+
     let queryText = `
             INSERT INTO "koalas" 
-                  ("name", "gender", "age", "ready_to_transfer", "notes")
+                ("name", "gender", "age", "ready_to_transfer", "notes")
             VALUES ($1, $2, $3, $4, $5);
             `;
 
@@ -50,13 +51,13 @@ koalaRouter.post('/', (req, res) => {
             newKoala.notes
         ];
 
-      pool.query(queryText, queryParams)
+    pool.query(queryText, queryParams)
             .then(() => {
-                  res.sendStatus(201);
+                res.sendStatus(201);
             })
             .catch((error) => {
-                  console.log(`Error adding new koala 👎`, error);
-                  res.sendStatus(500);
+                console.log(`Error adding new koala 👎`, error);
+                res.sendStatus(500);
             });
 }); // end of POST endpoints
 

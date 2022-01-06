@@ -110,7 +110,7 @@ function onReadyToTransfer() {
 
   // Check if true/false then reassign to false/true respectively (stretch goal toggle)
   if (transferStatus) {
-     transferStatus = false;
+    transferStatus = false;
   } else {
     transferStatus = true;
   }
