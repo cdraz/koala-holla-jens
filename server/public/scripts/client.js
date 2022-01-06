@@ -17,7 +17,8 @@ $(document).ready(function () {
 }); // end doc ready
 
 function setupClickListeners() {
-  $('#addButton').on('click', function () {
+  $('#koalaForm').on('submit', function (event) {
+    event.preventDefault();
     console.log('in addButton on click');
     // get user input and put in an object
     // NOT WORKING YET :(
@@ -59,10 +60,19 @@ function saveKoala(){
     name: $('#nameIn').val(),
     gender: $('#genderIn').val(),
     age: $('#ageIn').val(),
-    ready_to_transfer: $('#readyForTransferIn').val(), 
+    ready_to_transfer: false, 
     notes: $('#notesIn').val(),
   }
 
+  if (newKoala.name === '') {
+    alert('You must enter a name')
+    return;
+  }
+
+  // checks if check box is checked!!
+  if ($('#readyForTransferIn').is(':checked')) {
+    newKoala.ready_to_transfer = true;
+  } 
   // ajax call to server to get koalas
   // sending to server as "req.body"
   $.ajax({
@@ -72,6 +82,8 @@ function saveKoala(){
   })
   .then((response) => {
     console.log('in POST /koalas', response);
+    $('.koalaInput').val('');
+    $('#readyForTransferIn').prop('checked', false)
     getKoalas();
   })
   .catch((err) => {
@@ -102,7 +114,7 @@ function deleteKoala() {
 } // end deleteKoala
 
 function onReadyToTransfer() {
-  console.log( 'in onReadyToTransfer' );
+  console.log('in onReadyToTransfer');
 
   // Pull koalaId and transfer status from table
   let koalaId = $(this).parents('tr').data('id');
