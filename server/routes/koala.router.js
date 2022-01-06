@@ -37,7 +37,7 @@ koalaRouter.post('/', (req, res) => {
       console.log('Adding koala', newKoala);
       
       let queryText = `
-            INSERT INTO "books" 
+            INSERT INTO "koalas" 
                   ("name", "gender", "age", "ready_to_transfer", "notes")
             VALUES ($1, $2, $3, $4, $5);
             `;

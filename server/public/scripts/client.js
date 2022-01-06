@@ -10,6 +10,7 @@ $(document).ready(function () {
   // Calling deleteKoala to show that it console logs and works
   deleteKoala();
 
+  saveKoala();
   onReadyToTransfer();
 }); // end doc ready
 
@@ -46,14 +47,14 @@ function getKoalas() {
 } // end getKoalas
 
 
-function saveKoala( newKoala ){
-  console.log( 'in saveKoala', newKoala);
+function saveKoala( ){
+  console.log( 'in saveKoala');
   // ajax call to server to get koalas
   // sending to server as "req.body"
   $.ajax({
     method: 'POST',
     url:    '/koalas',
-    data:   newKoala,
+//    data:   newKoala,
   })
   .then((response) => {
     console.log('in POST /koalas', response);
