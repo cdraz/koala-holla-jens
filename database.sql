@@ -1,6 +1,6 @@
 CREATE TABLE "koalas"
     (
-        "id" SEARIAL PRIMARY KEY,
+        "id" SERIAL PRIMARY KEY,
         "name" VARCHAR (20) NOT NULL,
         "gender" VARCHAR (1) NOT NULL,
         "age" INTEGER NOT NULL,
