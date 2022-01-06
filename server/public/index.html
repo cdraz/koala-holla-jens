@@ -39,7 +39,8 @@
         <div class="grid">
           <section>
             <h2>All Koalas</h2>
-            <table class="table table-bordered">
+            <input type="text" id="filterField" onkeyup="filterKoalas()" placeholder="Filter Koalas by Name">
+            <table class="table table-bordered" id="koalaTable">
               <thead>
                 <tr>
                   <th>Name</th>

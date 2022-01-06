@@ -110,7 +110,7 @@ function onReadyToTransfer() {
 
   // Check if true/false then reassign to false/true respectively (stretch goal toggle)
   if (transferStatus) {
-     transferStatus = false;
+    transferStatus = false;
   } else {
     transferStatus = true;
   }
@@ -159,6 +159,30 @@ function renderKoalas(koalas) {
         </td>
       </tr>
     `);
-
   }
 }
+
+// Function to filter/search for koalas
+function filterKoalas() {
+  // Declare variables
+  let input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("filterField");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("koalaTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows and hide those who don't match
+  // the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1){
+        tr[i].style.display = ""
+      }
+      else{
+        tr[i].style.display = "none";
+      }
+    }
+  }
+};
