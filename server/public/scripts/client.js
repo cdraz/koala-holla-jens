@@ -53,21 +53,30 @@ function getKoalas() {
 
 function saveKoala(){
   console.log( 'in saveKoala');
+
+  // creating newKoala Object by accessing input fields with jQuery
+  let newKoala = {
+    name: $('#nameIn').val(),
+    gender: $('#genderIn').val(),
+    age: $('#ageIn').val(),
+    ready_to_transfer: $('#readyForTransferIn').val(), 
+    notes: $('#notesIn').val(),
+  }
+
   // ajax call to server to get koalas
   // sending to server as "req.body"
   $.ajax({
     method: 'POST',
     url:    '/koalas',
-    // Commenting out until we're ready to create click
-    // Need render function complete first
-    // data:   newKoala,
+    data:   newKoala,
   })
   .then((response) => {
     console.log('in POST /koalas', response);
+    getKoalas();
   })
   .catch((err) => {
     console.log('POST /koalas Failed!! 🤯', err);
-    alert('Unable to connect to server, please try again!!')
+    alert('Unable to connect to server, please try again!!');
   })
 }; // End of saveKoala POST function
 
