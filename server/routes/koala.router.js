@@ -56,7 +56,8 @@ koalaRouter.post('/', (req, res) => {
         
         if (!testParams(queryParams) ) {
             console.log('data validation failed 🤢');
-            res.sendStatus(500);
+            res.sendStatus(400);
+            return;
         };
 
     pool.query(queryText, queryParams)
