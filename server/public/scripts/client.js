@@ -329,3 +329,8 @@ function cancelEdit(){
   $('#submitBtn').remove();
   getKoalas();
 };
+
+function editPUT() {
+  console.log('in edit PUT');
+  // endpoint will be /koalas/edit/:id
+}
