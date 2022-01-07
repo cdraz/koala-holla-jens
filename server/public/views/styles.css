@@ -36,6 +36,7 @@ main {
 main .grid {
     padding-top: 30px;
 }
+
 footer {
     padding-top: 45px;
     padding-left: 45px;
@@ -45,4 +46,13 @@ footer {
     height: 100px;
     bottom: 0;
     width: 100%;
+}
+
+.transferCheckbox {
+    height: 20px;
+    width: 20px;
+}
+
+#transferColumn {
+    width: 60px;
 }

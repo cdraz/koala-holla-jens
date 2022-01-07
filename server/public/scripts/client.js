@@ -38,7 +38,7 @@ function setupClickListeners() {
     saveKoala( koalaToSend );
   }); 
   $(document).on('click', '.deleteBtn', deleteKoala );
-  $(document).on('click', '.transferBtn', onReadyToTransfer );
+  $(document).on('change', '.transferCheckbox', onReadyToTransfer );
   $(document).on('click', '#sweet', sweetA );
   $(document).on('click', '#editBtn', editKoalas);
 
@@ -183,13 +183,8 @@ function renderKoalas(koalas) {
         <td class="name">${koala.name}</td>
         <td class="age">${koala.age}</td>
         <td class="gender">${koala.gender}</td>
-        <td>${koala.ready_to_transfer}</td>
+        <td>${checkTransferStatus(koala)}</td>
         <td class="notes">${koala.notes}</td>
-        <td>
-          <button class="transferBtn">
-            Ready for Transfer
-          </button>
-        </td>
         <td>
           <button class="deleteBtn">
           Delete
@@ -199,6 +194,15 @@ function renderKoalas(koalas) {
     `);
   }
 }
+
+// Function to check transfer status
+function checkTransferStatus(koala) {
+  if (koala.ready_to_transfer) {
+    return '<input type="checkbox" class="transferCheckbox" checked>'
+  } else {
+    return '<input type="checkbox" class="transferCheckbox">'
+  }
+} // end checkTransferStatus
 
 // Function to filter/search for koalas
 function filterKoalas() {
@@ -248,7 +252,7 @@ function editKoalas() {
   // Change heading from add to edit
   $('#heading').text('Editing Koala Details');
 
-    // Append subkmit button to exit edit mode and return to add mode
+    // Append submit button to exit edit mode and return to add mode
     $('#editSection').append(`
     <button class="someBtns" id="submitBtn">
     Submit edits
