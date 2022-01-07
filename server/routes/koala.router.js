@@ -93,6 +93,42 @@ koalaRouter.put('/:id', (req, res) => {
         })
 });
 
+koalaRouter.put('/edit/:id', (req, res) => {
+    console.log(`in /edit/${req.params.id}`);
+
+    let queryText = `
+        UPDATE "koalas"
+        SET "name" = $1,
+            "gender" = $2,
+            "age" = $3,
+            "notes" = $4
+        WHERE "id" = $5;
+    `;
+
+    let queryParams = [
+        req.body.name,
+        req.body.gender,
+        req.body.age,
+        req.body.notes,
+        req.params.id
+    ];
+
+    if (!testParams(queryParams) ) {
+        console.log('data validation failed 🤢');
+        res.sendStatus(400);
+        return;
+    };
+
+    pool.query(queryText, queryParams)
+    .then( dbRes => {
+        res.sendStatus(201);
+    })
+    .catch( err => {
+        console.log(`PUT /koalas/${req.params.id} failed`, err);
+    });
+});
+
+
 // DELETE
 // Adding endpoint
 koalaRouter.delete('/:id', (req, res) => {
