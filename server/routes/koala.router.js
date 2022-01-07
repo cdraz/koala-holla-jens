@@ -1,6 +1,7 @@
 const express = require('express');
 const koalaRouter = express.Router();
 const pg = require('pg');
+const testParams = require('../module/testParams');
 
 // DB CONNECTION
 const config = {
@@ -42,22 +43,21 @@ koalaRouter.post('/', (req, res) => {
                 ("name", "gender", "age", "ready_to_transfer", "notes")
             VALUES ($1, $2, $3, $4, $5);
             `;
+    let isTrueSet = (newKoala.ready_to_transfer === 'true')
 
     let queryParams = [
             newKoala.name,
             newKoala.gender,
-            newKoala.age, 
-            newKoala.ready_to_transfer, 
+            Number(newKoala.age), 
+            isTrueSet, 
             newKoala.notes
         ];
         console.log()
-        let nameRegEx = /^\D+$/;
-        if (newKoala.name){};
-
-        if (newKoala.gender !== 'M' || newKoala.gender !== 'F') {
-            res.status(500).send('gender must be M or F');
-            return;
-        }
+        
+        if (!testParams(queryParams) ) {
+            console.log('data validation failed 🤢');
+            res.sendStatus(500);
+        };
 
     pool.query(queryText, queryParams)
             .then(() => {
