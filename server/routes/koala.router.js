@@ -50,6 +50,14 @@ koalaRouter.post('/', (req, res) => {
             newKoala.ready_to_transfer, 
             newKoala.notes
         ];
+        console.log()
+        let nameRegEx = /^\D+$/;
+        if (newKoala.name){};
+
+        if (newKoala.gender !== 'M' || newKoala.gender !== 'F') {
+            res.status(500).send('gender must be M or F');
+            return;
+        }
 
     pool.query(queryText, queryParams)
             .then(() => {
