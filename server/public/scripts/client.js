@@ -229,31 +229,55 @@ function filterKoalas() {
 function editKoalas() {
   console.log('in edit koalas');
 
-  // Setting variables to target editable inputs
-  koalaEditID = $(this).parents('tr').data('id');
-  let koalaName = $(this).parent().siblings('.name').text();
-  let koalaAge = $(this).parent().siblings('.age').text();
-  let koalaGender = $(this).parent().siblings('.gender').text();
-  let koalaNotes = $(this).parent().siblings('.notes').text();
+  // // Setting variables to target editable inputs
+  // koalaEditID = $(this).parents('tr').data('id');
+  // let koalaName = $(this).parent().siblings('.name').text();
+  // let koalaAge = $(this).parent().siblings('.age').text();
+  // let koalaGender = $(this).parent().siblings('.gender').text();
+  // let koalaNotes = $(this).parent().siblings('.notes').text();
 
-  // Toggle edit mode
-  editMode = true;
+  // // Toggle edit mode
+  // editMode = true;
 
-  // Fill form with currently edited Koala information
-  $('#nameIn').val(koalaName);
-  $('#ageIn').val(koalaAge);
-  $('#genderIn').val(koalaGender);
-  $('#notesIn').val(koalaNotes);
+  // // Fill form with currently edited Koala information
+  // $('#nameIn').val(koalaName);
+  // $('#ageIn').val(koalaAge);
+  // $('#genderIn').val(koalaGender);
+  // $('#notesIn').val(koalaNotes);
 
   // Change heading from add to edit
   $('#heading').text('Editing Koala Details');
 
+    // Append subkmit button to exit edit mode and return to add mode
+    $('#editSection').append(`
+    <button class="someBtns" id="submitBtn">
+    Submit edits
+    </button>
+  `);
+
   // Append cancel button to exit edit mode and return to add mode
-  $('#addKoala').append(`
-    <button id="cancelEditBtn">
+  $('#editSection').append(`
+    <button class="someBtns" id="cancelEditBtn">
     Cancel edits
     </button>
   `);
 
+  $('td').on('click', function() {
+    var $this = $(this);
+    var $input = $('<input>', {
+        value: $this.text(),
+        type: 'text',
+        blur: function() {
+          $this.text(this.value);
+        },
+        keyup: function(e) {
+          if (e.which === 13) $input.blur();
+        }
+    }).appendTo( $this.empty() ).focus();
+});
+
+// Remove edit button, needs to be appended again in both the
+// cancel and submit functions
+$(this).remove();
 
 };
