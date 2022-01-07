@@ -35,6 +35,12 @@ function setupClickListeners() {
   }); 
   $(document).on('click', '.deleteBtn', deleteKoala );
   $(document).on('click', '.transferBtn', onReadyToTransfer );
+  $(document).on('click', '#sweet', sweetA );
+
+};
+
+function sweetA() {
+  Swal.fire('Any fool can use a computer')
 };
 
 function getKoalas() {
@@ -95,22 +101,37 @@ function saveKoala(){
 
 // Creating ajax request for deleting a Koala
 function deleteKoala() {
-  // Need to grab the koala ID after we render
-  let koalaId = $(this).parents('tr').data('id');
-  console.log('in delete Koala');
+ // Need to grab the koala ID after we render
+ let koalaId = $(this).parents('tr').data('id');
+ console.log('in delete Koala');
 
-  // Create boiler plate ajax request to delete koala
-  $.ajax({
-    method: 'DELETE',
-    url: `/koalas/${koalaId}`,
-  })
-    .then( (response) => {
-      console.log('delete successful!', response);
-      getKoalas();
-    })
-    .catch( (err) => {
-      console.log('delete failed', err);
-    })
+// This is sweetAlert2
+// When delete button clicked it will pop out a window
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't get him back 🐨!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    // When confirmed is the result then it would run $.ajax
+    // to delete the item from database
+    if (result.isConfirmed) {
+      // Create boiler plate ajax request to delete koala
+      $.ajax({
+        method: 'DELETE',
+        url: `/koalas/${koalaId}`,
+      })
+        .then( (response) => {
+          console.log('delete successful!', response);
+          getKoalas();
+        })
+        .catch( (err) => {
+          console.log('delete failed', err);
+        })};
+  });
 } // end deleteKoala
 
 function onReadyToTransfer() {
