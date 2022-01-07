@@ -41,6 +41,8 @@ function setupClickListeners() {
   $(document).on('change', '.transferCheckbox', onReadyToTransfer );
   $(document).on('click', '#sweet', sweetA );
   $(document).on('click', '#editBtn', editKoalas);
+  $(document).on('click', '#submitBtn', submitEdit);
+  $(document).on('click', '#cancelEditBtn', cancelEdit);
 
 };
 
@@ -180,11 +182,11 @@ function renderKoalas(koalas) {
   for (let koala of koalas) {
     $('#viewKoalas').append(`
       <tr data-id="${koala.id}" data-ready_to_transfer="${koala.ready_to_transfer}">
-        <td class="name">${koala.name}</td>
-        <td class="age">${koala.age}</td>
-        <td class="gender">${koala.gender}</td>
+        <td class="name edit">${koala.name}</td>
+        <td class="age edit">${koala.age}</td>
+        <td class="gender edit">${koala.gender}</td>
         <td>${checkTransferStatus(koala)}</td>
-        <td class="notes">${koala.notes}</td>
+        <td class="notes edit">${koala.notes}</td>
         <td>
           <button class="deleteBtn">
           Delete
@@ -266,7 +268,7 @@ function editKoalas() {
     </button>
   `);
 
-  $('td').on('click', function() {
+  $('.edit').on('click', function() {
     var $this = $(this);
     var $input = $('<input>', {
         value: $this.text(),
@@ -284,4 +286,32 @@ function editKoalas() {
 // cancel and submit functions
 $(this).remove();
 
+};
+
+// Start if submitEdit button function
+function submitEdit(){
+  console.log('in submitEdit');
+
+  // appending the editBtn
+  $('#editSection').append(`
+  <button class="someBtns" id="editBtn">
+  Edit Koalas
+  </button>
+  `);
+  $(this).remove();
+  $('#cancelEditBtn').remove();
+};
+
+// Start if cancelEdit button
+function cancelEdit(){
+  console.log('in cancelEdit');
+
+  // appending the editBtn
+  $('#editSection').append(`
+  <button class="someBtns" id="editBtn">
+  Edit Koalas
+  </button>
+  `);
+  $(this).remove();
+  $('#submitBtn').remove();
 };
