@@ -277,7 +277,11 @@ function editKoalas() {
           $this.text(this.value);
         },
         keyup: function(e) {
-          if (e.which === 13) $input.blur();
+          if (e.which === 13) {
+            $input.blur();
+            // $(this).parents('tr').classList.add('updated')
+          $this.parent('tr').addClass('updated');
+          };
         }
     }).appendTo( $this.empty() ).focus();
 });
@@ -298,8 +302,17 @@ function submitEdit(){
   Edit Koalas
   </button>
   `);
+  $.ajax({
+    method: "PUT",
+    url:    `/koalas/edit`
+  })
+
+
+
+
   $(this).remove();
   $('#cancelEditBtn').remove();
+  getKoalas();
 };
 
 // Start if cancelEdit button
@@ -314,4 +327,5 @@ function cancelEdit(){
   `);
   $(this).remove();
   $('#submitBtn').remove();
+  getKoalas();
 };
