@@ -248,10 +248,17 @@ function editKoalas() {
   // Change heading from add to edit
   $('#heading').text('Editing Koala Details');
 
+    // Append cancel button to exit edit mode and return to add mode
+    $('#addKoala').append(`
+    <button id="submitChangesBtn">
+    Submit Changes
+    </button>
+  `);
+
   // Append cancel button to exit edit mode and return to add mode
   $('#addKoala').append(`
     <button id="cancelEditBtn">
-    Cancel edits
+    Cancel Edits
     </button>
   `);
 
