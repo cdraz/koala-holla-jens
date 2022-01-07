@@ -24,7 +24,7 @@ This project is a full-stack web application including HTML, CSS, Bootstrap, jQu
 
 The following individuals contributed to the success of this project:
 
-[Chris Radizlo](https://github.com/cdraz) // 
+[Chris Razidlo](https://github.com/cdraz) // 
 [Sabrina Ciaciura](https://github.com/ciaci0028) // 
 [Ken Dang](https://github.com/k3ndang) // 
 [James Petran](https://github.com/jamespetran)
