@@ -7,6 +7,10 @@ console.log('js');
 //   notes:  'This is fake',
 // };
 
+// Create global variables for some functions
+let koalaEditID = null;
+let editMode = false;
+
 $(document).ready(function () {
   console.log('JQ');
   // Establish Click Listeners
@@ -36,6 +40,7 @@ function setupClickListeners() {
   $(document).on('click', '.deleteBtn', deleteKoala );
   $(document).on('click', '.transferBtn', onReadyToTransfer );
   $(document).on('click', '#sweet', sweetA );
+  $(document).on('click', '#editBtn', editKoalas);
 
 };
 
@@ -175,11 +180,11 @@ function renderKoalas(koalas) {
   for (let koala of koalas) {
     $('#viewKoalas').append(`
       <tr data-id="${koala.id}" data-ready_to_transfer="${koala.ready_to_transfer}">
-        <td>${koala.name}</td>
-        <td>${koala.age}</td>
-        <td>${koala.gender}</td>
+        <td class="name">${koala.name}</td>
+        <td class="age">${koala.age}</td>
+        <td class="gender">${koala.gender}</td>
         <td>${koala.ready_to_transfer}</td>
-        <td>${koala.notes}</td>
+        <td class="notes">${koala.notes}</td>
         <td>
           <button class="transferBtn">
             Ready for Transfer
@@ -218,4 +223,37 @@ function filterKoalas() {
       }
     }
   }
+};
+
+
+function editKoalas() {
+  console.log('in edit koalas');
+
+  // Setting variables to target editable inputs
+  koalaEditID = $(this).parents('tr').data('id');
+  let koalaName = $(this).parent().siblings('.name').text();
+  let koalaAge = $(this).parent().siblings('.age').text();
+  let koalaGender = $(this).parent().siblings('.gender').text();
+  let koalaNotes = $(this).parent().siblings('.notes').text();
+
+  // Toggle edit mode
+  editMode = true;
+
+  // Fill form with currently edited Koala information
+  $('#nameIn').val(koalaName);
+  $('#ageIn').val(koalaAge);
+  $('#genderIn').val(koalaGender);
+  $('#notesIn').val(koalaNotes);
+
+  // Change heading from add to edit
+  $('#heading').text('Editing Koala Details');
+
+  // Append cancel button to exit edit mode and return to add mode
+  $('#addKoala').append(`
+    <button id="cancelEditBtn">
+    Cancel edits
+    </button>
+  `);
+
+
 };
