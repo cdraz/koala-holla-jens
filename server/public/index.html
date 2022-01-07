@@ -31,13 +31,13 @@
           <section id="addKoala">
             <h2 id="heading">Add Koala</h2>
             <form id="koalaForm">
-               <input type="text" class="koalaInput" id="nameIn" value="" placeholder="Name" required>
-               <input type="text" class="koalaInput" id="ageIn" value="" placeholder="Age" required>
-               <input type="text" class="koalaInput" id="genderIn" value="" placeholder="Gender" required>
-               <label for="readyForTransferIn"> Ready to Transfer</label>
-               <input type="checkbox" id="readyForTransferIn">
-               <input type="text" class="koalaInput" id="notesIn" placeholder="Notes">
-               <button type="submit" id="addButton">Add Koala</button>
+              <input type="text" class="koalaInput" id="nameIn" value="" placeholder="Name" required>
+              <input type="text" class="koalaInput" id="ageIn" value="" placeholder="Age" required>
+              <input type="text" class="koalaInput" id="genderIn" value="" placeholder="Gender" required>
+              <label for="readyForTransferIn"> Ready to Transfer</label>
+              <input type="checkbox" id="readyForTransferIn">
+              <input type="text" class="koalaInput" id="notesIn" placeholder="Notes">
+              <button type="submit" id="addButton">Add Koala</button>
             </form>
           </section>
         </div>
@@ -47,13 +47,13 @@
             <input type="text" id="filterField" onkeyup="filterKoalas()" placeholder="Filter Koalas by Name">
             <table class="table table-bordered" id="koalaTable">
               <thead>
+                <div class="someBtns" id="editSection"><button id="editBtn">Edit Koalas</button></div>
                 <tr>
                   <th>Name</th>
                   <th>Age</th>
                   <th>Gender</th>
                   <th id="transferColumn">Transfer Ready</th>
                   <th>Notes</th>
-                  <th><button id="editBtn">Edit Koalas</button></th>
                 </tr>
               </thead>
               <tbody id="viewKoalas">

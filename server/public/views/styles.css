@@ -21,6 +21,14 @@ header {
     float: left;
 }
 
+#filterField {
+    margin-bottom: 10px;
+}
+
+.someBtns {
+    margin-bottom: 10px;
+}
+
 main {
     padding: 50px;
 }
