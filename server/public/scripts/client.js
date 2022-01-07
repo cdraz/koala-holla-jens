@@ -252,7 +252,7 @@ function editKoalas() {
   // $('#notesIn').val(koalaNotes);
 
   // Change heading from add to edit
-  $('#heading').text('Editing Koala Details');
+  // $('#heading').text('Editing Koala Details');
 
     // Append submit button to exit edit mode and return to add mode
     $('#editSection').append(`
@@ -304,7 +304,8 @@ function submitEdit(){
   `);
   $.ajax({
     method: "PUT",
-    url:    `/koalas/edit`
+    // url:    `/koalas/edit/${id}`,
+    // data:   newKoala
   })
 
 
@@ -332,5 +333,13 @@ function cancelEdit(){
 
 function editPUT() {
   console.log('in edit PUT');
-  // endpoint will be /koalas/edit/:id
+  // endpoint will be /koalas/edit/:id  
+
+  let newKoala = {
+    name: $('.updated').first().child('.name').val(),
+    gender: $('.updated').first().child('.gender').val(),
+    age: $('.updated').first().child('.age').val(),
+    notes: $('.updated').first().child('.notes').val(),
+  }
+  console.log(newKoala);
 }
